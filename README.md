@@ -52,6 +52,16 @@ The notebook seeds NumPy and PyTorch and uses a fixed validation split. Saved me
 
 The notebook contains historical validation output. No current leaderboard score or freshly reproduced accuracy is asserted here.
 
+## Reliability checks
+
+Training and validation losses are weighted by the number of samples, including partial batches. Validation accuracy uses the supplied loader rather than a global dataset. Focused checks use small tensor/model doubles; they validate metric arithmetic without training PyTorch or reproducing model accuracy.
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+The GitHub Actions workflow installs only the dependencies used by these checks and performs no model downloads or training.
+
 ## License
 
 [MIT](LICENSE).
