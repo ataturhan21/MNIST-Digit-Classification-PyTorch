@@ -1,72 +1,57 @@
 # MNIST Digit Classification with PyTorch
 
-A complete PyTorch-based solution for the MNIST handwritten digit classification challenge, including data exploration, model training, evaluation, and Kaggle submission generation.
+A notebook for Kaggle's Digit Recognizer competition. It reads labeled and unlabeled pixel CSV files, trains a fully connected PyTorch classifier, and exports submission predictions.
 
-## Overview
+**[Open the notebook](mnist_digit_classification.ipynb)** · **[Dependencies](requirements.txt)** · **[MIT license](LICENSE)**
 
-The MNIST dataset is a collection of 70,000 grayscale images of handwritten digits (0–9). This project solves the multi-class classification problem of identifying the correct digit for each image. It serves as an excellent introduction to deep learning concepts, particularly neural networks.
+## Model and workflow
 
-## Features
+- Normalize 784 pixel values to the range 0–1.
+- Split the labeled CSV into 80% training and 20% validation data with `random_state=42`.
+- Train a 784 → 128 → 64 → 10 network with ReLU activations, cross-entropy loss, and Adam at a learning rate of 0.001.
+- Use batches of 64 and 10 epochs in the default training call.
+- Generate `submission.csv` with `ImageId` and `Label` columns.
 
-- **Data Preprocessing**: Includes normalization and custom PyTorch `Dataset` creation.
-- **Exploratory Data Analysis**: Visualizes sample images and provides statistical insights.
-- **Deep Learning Model**: Implements a fully connected neural network using PyTorch.
-- **Training and Evaluation**: Tracks loss and accuracy with a validation split.
-- **Kaggle Submission**: Generates predictions and prepares a CSV for Kaggle competition submission.
+The implementation uses the Kaggle competition CSVs rather than downloading MNIST through `torchvision.datasets`.
 
-## Getting Started
+## Run on Kaggle
 
-### Prerequisites
+1. Create a notebook and attach the [Digit Recognizer competition data](https://www.kaggle.com/competitions/digit-recognizer/data).
+2. Import `mnist_digit_classification.ipynb`.
+3. Confirm the paths in **Loading the Dataset**:
 
-- Python 3.8+
-- PyTorch 1.12+
-- Jupyter Notebook or Kaggle environment
-
-### Installation
-
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/ata-turhan/MNIST-Digit-Classification-PyTorch.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd MNIST-Digit-Classification-PyTorch
-   ```
-3. Install the required dependencies:
-   ```bash
-   pip install -r requirements.txt
+   ```python
+   train_data_path = "/kaggle/input/digit-recognizer/train.csv"
+   test_data_path = "/kaggle/input/digit-recognizer/test.csv"
    ```
 
-## Usage
+4. Run the cells in order, then download `submission.csv` from the working directory.
 
-1. **Run the Notebook**:
-   Open `mnist_digit_classification.ipynb` in Jupyter Notebook or directly on Kaggle.
-   
-2. **Train the Model**:
-   Execute the notebook cells to preprocess data, train the model, and evaluate it.
+The current code runs on the CPU; it does not move the model or input tensors to a GPU.
 
-3. **Generate Kaggle Submission**:
-   Run the prediction step to create `submission.csv`, ready for upload to Kaggle.
+## Run locally
 
-## Repository Structure
-
-```
-MNIST-Digit-Classification-PyTorch/
-│
-├── README.md                       # Project overview
-├── mnist_digit_classification.ipynb # Main notebook
-├── requirements.txt                # Python dependencies
-└── LICENSE                         # MIT License
+```bash
+git clone https://github.com/ataturhan21/MNIST-Digit-Classification-PyTorch.git
+cd MNIST-Digit-Classification-PyTorch
+python -m venv .venv
 ```
 
-## Results
+Activate the environment, then run:
 
-The model achieves an accuracy of **96.95%** on the validation set and **96.89%** on Kaggle leaderboard submissions.
+```bash
+python -m pip install -r requirements.txt notebook
+jupyter notebook mnist_digit_classification.ipynb
+```
 
-## Contributing
+Download the competition CSVs separately and change the 2 input paths before executing the notebook. The dataset and trained weights are not included.
 
-Contributions are welcome! Please submit a pull request or raise an issue if you find a bug or have suggestions for improvement.
+## Reproducibility
+
+The notebook seeds NumPy and PyTorch and uses a fixed validation split. Saved metadata records Python 3.10.14, but the dependency list is unpinned; record the package versions used for a new run. Seeds do not guarantee identical results across every platform or package version.
+
+The notebook contains historical validation output. No current leaderboard score or freshly reproduced accuracy is asserted here.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+[MIT](LICENSE).
