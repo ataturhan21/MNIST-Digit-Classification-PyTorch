@@ -18,12 +18,7 @@ The implementation uses the Kaggle competition CSVs rather than downloading MNIS
 
 1. Create a notebook and attach the [Digit Recognizer competition data](https://www.kaggle.com/competitions/digit-recognizer/data).
 2. Import `mnist_digit_classification.ipynb`.
-3. Confirm the paths in **Loading the Dataset**:
-
-   ```python
-   train_data_path = "/kaggle/input/digit-recognizer/train.csv"
-   test_data_path = "/kaggle/input/digit-recognizer/test.csv"
-   ```
+3. Confirm the competition files are at `/kaggle/input/digit-recognizer/train.csv` and `/kaggle/input/digit-recognizer/test.csv`. **Loading the Dataset** uses that folder whenever it exists.
 
 4. Run the cells in order, then download `submission.csv` from the working directory.
 
@@ -44,23 +39,26 @@ python -m pip install -r requirements.txt notebook
 jupyter notebook mnist_digit_classification.ipynb
 ```
 
-Download the competition CSVs separately and change the 2 input paths before executing the notebook. The dataset and trained weights are not included.
+Download `train.csv` and `test.csv` from the competition and put them in a `data/` folder next to the notebook; the notebook reads from `data/` when the Kaggle input folder does not exist. The dataset and trained weights are not included, and `data/` and `submission.csv` are ignored by Git.
 
 ## Reproducibility
 
 The notebook seeds NumPy and PyTorch and uses a fixed validation split. Saved metadata records Python 3.10.14, but the dependency list is unpinned; record the package versions used for a new run. Seeds do not guarantee identical results across every platform or package version.
 
-The notebook contains historical validation output. No current leaderboard score or freshly reproduced accuracy is asserted here.
+The notebook is committed without saved outputs, so no validation accuracy or leaderboard score is reported here. Run it to produce the per-epoch training loss, validation loss and validation accuracy.
 
 ## Reliability checks
 
 Training and validation losses are weighted by the number of samples, including partial batches. Validation accuracy uses the supplied loader rather than a global dataset. Focused checks use small tensor/model doubles; they validate metric arithmetic without training PyTorch or reproducing model accuracy.
 
+The checks need only NumPy:
+
 ```bash
+python -m pip install numpy
 python -m unittest discover -s tests -v
 ```
 
-The GitHub Actions workflow installs only the dependencies used by these checks and performs no model downloads or training.
+The GitHub Actions workflow runs them on Ubuntu and Windows, installs only NumPy, and performs no model downloads or training.
 
 ## License
 

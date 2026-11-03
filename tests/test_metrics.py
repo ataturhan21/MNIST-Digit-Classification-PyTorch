@@ -22,7 +22,7 @@ class Tensor:
 
 def definitions():
     path = Path(__file__).resolve().parents[1] / "mnist_digit_classification.ipynb"
-    notebook = json.loads(path.read_text())
+    notebook = json.loads(path.read_text(encoding="utf-8"))
     source = next("".join(cell["source"]) for cell in notebook["cells"]
                   if "def train_model" in "".join(cell["source"]))
     nodes = [node for node in ast.parse(source).body if isinstance(node, ast.FunctionDef)]
