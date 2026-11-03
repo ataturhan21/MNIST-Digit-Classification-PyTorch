@@ -18,12 +18,7 @@ The implementation uses the Kaggle competition CSVs rather than downloading MNIS
 
 1. Create a notebook and attach the [Digit Recognizer competition data](https://www.kaggle.com/competitions/digit-recognizer/data).
 2. Import `mnist_digit_classification.ipynb`.
-3. Confirm the paths in **Loading the Dataset**:
-
-   ```python
-   train_data_path = "/kaggle/input/digit-recognizer/train.csv"
-   test_data_path = "/kaggle/input/digit-recognizer/test.csv"
-   ```
+3. Confirm the competition files are at `/kaggle/input/digit-recognizer/train.csv` and `/kaggle/input/digit-recognizer/test.csv`. **Loading the Dataset** uses that folder whenever it exists.
 
 4. Run the cells in order, then download `submission.csv` from the working directory.
 
@@ -44,7 +39,7 @@ python -m pip install -r requirements.txt notebook
 jupyter notebook mnist_digit_classification.ipynb
 ```
 
-Download the competition CSVs separately and change the 2 input paths before executing the notebook. The dataset and trained weights are not included.
+Download `train.csv` and `test.csv` from the competition and put them in a `data/` folder next to the notebook; the notebook reads from `data/` when the Kaggle input folder does not exist. The dataset and trained weights are not included, and `data/` and `submission.csv` are ignored by Git.
 
 ## Reproducibility
 
