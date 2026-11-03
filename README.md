@@ -51,11 +51,14 @@ The notebook is committed without saved outputs, so no validation accuracy or le
 
 Training and validation losses are weighted by the number of samples, including partial batches. Validation accuracy uses the supplied loader rather than a global dataset. Focused checks use small tensor/model doubles; they validate metric arithmetic without training PyTorch or reproducing model accuracy.
 
+The checks need only NumPy:
+
 ```bash
+python -m pip install numpy
 python -m unittest discover -s tests -v
 ```
 
-The GitHub Actions workflow installs only the dependencies used by these checks and performs no model downloads or training.
+The GitHub Actions workflow runs them on Ubuntu and Windows, installs only NumPy, and performs no model downloads or training.
 
 ## License
 
