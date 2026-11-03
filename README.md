@@ -45,7 +45,7 @@ Download `train.csv` and `test.csv` from the competition and put them in a `data
 
 The notebook seeds NumPy and PyTorch and uses a fixed validation split. Saved metadata records Python 3.10.14, but the dependency list is unpinned; record the package versions used for a new run. Seeds do not guarantee identical results across every platform or package version.
 
-The notebook contains historical validation output. No current leaderboard score or freshly reproduced accuracy is asserted here.
+The notebook is committed without saved outputs, so no validation accuracy or leaderboard score is reported here. Run it to produce the per-epoch training loss, validation loss and validation accuracy.
 
 ## Reliability checks
 
