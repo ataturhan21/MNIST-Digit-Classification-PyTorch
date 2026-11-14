@@ -2,7 +2,7 @@
 
 A notebook for Kaggle's Digit Recognizer competition. It reads labeled and unlabeled pixel CSV files, trains a fully connected PyTorch classifier, and exports submission predictions.
 
-**[Open the notebook](mnist_digit_classification.ipynb)** · **[Dependencies](requirements.txt)** · **[MIT license](LICENSE)**
+**[Open the notebook](mnist_digit_classification.ipynb)** · **[Dependencies](requirements.txt)**
 
 ## Model and workflow
 
@@ -60,6 +60,6 @@ python -m unittest discover -s tests -v
 
 The GitHub Actions workflow runs them on Ubuntu and Windows, installs only NumPy, and performs no model downloads or training.
 
-## License
+## Copyright
 
-[MIT](LICENSE).
+© Ata Turhan. All rights reserved. This repository has no open-source license: its code may not be copied, modified or redistributed.
